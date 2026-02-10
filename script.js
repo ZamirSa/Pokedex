@@ -1,31 +1,45 @@
-async function init() {
-    await getData(30);
+async function onloadFunc() {
+    let response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=30&offset=0');
+    let responseAsJson = await response.json();
 
-    renderPokemonList();
+    await renderPokemonList(responseAsJson);
+
 }
 
-async function getData(length) {
-    for (let i = 1; i < length; i++) {
-        let response = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
-        let responseAsJson = await response.json();
-        console.log(responseAsJson);
+async function renderPokemonList(responseAsJson) {
+    let pokemonListRef = document.getElementById("pokemon-list");
+    pokemonListRef.innerHTML = "";
+    for (let i = 0; i < responseAsJson.results.length; i++) {
+        pokemonName = responseAsJson.results[i].name;
+
+        await getPokemonList(responseAsJson, pokemonListRef, i);
     }
 }
 
-function renderPokemonList() {
-    let mainRef = document.getElementById("main");
-    mainRef.innerHTML = "";
-    for (let i = 1; i < 30; i++) {
-        mainRef.innerHTML += getPokemonTemplate(i);
+async function getPokemonList(responseAsJson, pokemonListRef, i) {
+    let pokemonResponse = await fetch(responseAsJson.results[i].url);
+    let pokemonResponseAsJson = await pokemonResponse.json();
+
+    let img = pokemonResponseAsJson.sprites.other['official-artwork'].front_default;
+    let id = "#" + pokemonResponseAsJson.id;
+
+    pokemonListRef.innerHTML += getPokemonTemplate(i, pokemonName, img, id, responseAsJson);
+    await getPokemonTypes(i, pokemonResponseAsJson);
+}
+
+async function getPokemonTypes(i, pokemonResponseAsJson) {
+    for (let iType = 0; iType < pokemonResponseAsJson.types.length; iType++) {
+        document.getElementById("types" + i).innerHTML += `<div>${pokemonResponseAsJson.types[iType].type.name}</div>`
     }
 }
 
-
-function getPokemonTemplate(i) {
+function getPokemonTemplate(i, pokemonName, img, id) {
     return `
         <figure>
-            <img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${i}.png" alt="">
-            <h2></h2>
+            <div><img src="${img}" alt=""></div>
+            <p>${id}</p>
+            <h2>${pokemonName}</h2>
+            <span id="types${i}"></span>
         </figure>
         `
 }

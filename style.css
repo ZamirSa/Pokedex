@@ -5,7 +5,7 @@ body {
     justify-content: space-between;
     font-family: "NotoSansDisplay", sans-serif;
     min-height: 100vh;
-    background-image: linear-gradient(to bottom right, rgb(255, 255, 255), rgb(216, 216, 216));
+    background-image: linear-gradient(to bottom right, rgb(201, 201, 201), rgb(216, 216, 216));
 }
 
 header {
@@ -61,15 +61,55 @@ article {
 }
 
 figure {
-    background-color: #e2e2e2;
+    background-color: white;
+    flex-direction: column;
     display: flex;
     margin: 0;
+    padding: 20px;
+    border-radius: 5px;
+    gap: 5px;
+}
+
+figure div {
+    background-color: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+    border-radius: inherit;
 }
 
 figure img {
-    width: 250px;
+    width: 200px;
 }
 
+figure p {
+    margin: 0;
+    padding-left: 30px;
+    color: #919191;
+    font-weight: bold;
+}
+
+figure span {
+    display: flex;
+    gap: 5px;
+}
+
+figure span div {
+    width: 80px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: unset;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0;
+    padding-left: 30px;
+}
+
+h2::first-letter {
+   text-transform: capitalize; 
+}
 
 footer {
     height: 110px;
