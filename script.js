@@ -69,9 +69,11 @@ async function getPokemonList(responseAsJson, pokemonListRef, i) {
     let img = pokemonResponseAsJson.sprites.other['official-artwork'].front_default;
     let id = "#" + pokemonResponseAsJson.id;
 
-    pokemonListRef.innerHTML += getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson);
+    let height = pokemonResponseAsJson.height + "0 cm";
+
+    pokemonListRef.innerHTML += getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height);
     getPokemonTypes(id, pokemonResponseAsJson);
-    console.log(pokemonResponseAsJson.sprites.other.showdown.front_default)
+    console.log(pokemonResponseAsJson)
 }
 
 
@@ -80,30 +82,70 @@ function getPokemonTypes(id, pokemonResponseAsJson) {
         let type = pokemonResponseAsJson.types[iType].type.name;
         let color = colours[type];
 
-        document.getElementById("types" + id).innerHTML += `<div style="background-color: ${color};">${pokemonResponseAsJson.types[iType].type.name}</div>`
+        document.getElementById("types" + id).innerHTML += `<div style="background-color: ${color};">${pokemonResponseAsJson.types[iType].type.name}</div>`;
     }
 }
 
 
-function openPokemonOverlay(pokemonName, img) {
+function openPokemonOverlay(pokemonName, img, typeColor, id, height) {
     var element = document.getElementById("body");
     element.classList.add("hidden");
     let pokemonOverlay = document.getElementById("pokemon-overlay");
     pokemonOverlay.showModal();
-    pokemonOverlay.innerHTML = getPokemonOverlayTemplate(pokemonName, img);
+    pokemonOverlay.innerHTML = getPokemonOverlayTemplate(pokemonName, img, typeColor, id, height);
 
 }
 
-function getPokemonOverlayTemplate(pokemonName, img) {
+function closePokemonOverlay() {
+    var element = document.getElementById("body");
+    element.classList.remove("hidden");
+    let pokemonOverlay = document.getElementById("pokemon-overlay");
+    pokemonOverlay.close();
+
+}
+
+function getPokemonOverlayTemplate(pokemonName, img, typeColor, id, height) {
     return `
-    <img src="${img}" alt="">
-    <h3>${pokemonName}</h3>
+    <div class="pokemon-img-div" style="background-color: ${typeColor}";>
+        <div>
+            <h3>${pokemonName}</h3>
+            <p>${id}</p>
+        </div>
+        <div>
+            <span id="overlay-types${id}">Type</span>
+            <img src="${img}" alt="">
+        </div>
+    </div>
+        <button onclick="closePokemonOverlay()">exit</button>
+        <table>
+                <tr>
+                    <th>Height:</th>
+                    <td>${height}</td>
+                </tr>
+
+                <tr>
+                    <th>Weight:</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Abilities:</th>
+                    <td></td>
+                </tr>
+
+                <tr>
+                    <th>Gender:</th>
+                    <td></td>
+                </tr>
+    </table>
+
+
     `
 }
 
-function getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson) {
+function getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height) {
     return `
-        <figure onclick="openPokemonOverlay('${pokemonName}', '${pokemonResponseAsJson.sprites.other.showdown.front_default}')">
+        <figure onclick="openPokemonOverlay('${pokemonName}', '${pokemonResponseAsJson.sprites.other.showdown.front_default}', '${colours[pokemonResponseAsJson.types[0].type.name]}', '${id}', '${height}')">
             <div style="background-color: ${colours[pokemonResponseAsJson.types[0].type.name]}";><img src="${img}" alt=""></div>
             <p>${id}</p>
             <h2>${pokemonName}</h2>

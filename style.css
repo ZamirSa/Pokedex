@@ -150,6 +150,53 @@ figure:hover {
     outline: none;
 }
 
+.pokemonoverlay {
+    height: 650px;
+    border-radius: 15px;
+    padding: 0;
+}
+
+
+
+.pokemonoverlay[open] {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.pokemon-img-div {
+    width: 350px;
+    padding: 30px;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+}
+
+.pokemon-img-div img {
+    width: 120px;
+}
+
+.pokemon-img-div div {
+    display: flex;
+    justify-content: space-between;
+}
+
+h3::first-letter {
+    text-transform: capitalize;
+}
+
+h3 {
+    margin: 0;
+    font-size: 24px;
+}
+
+.pokemonoverlay p {
+    margin: 0;
+}
 
 footer {
     height: 110px;
