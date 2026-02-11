@@ -10,7 +10,7 @@
     <title>Pokédex</title>
 </head>
 
-<body onload="onloadFunc()">
+<body onload="init()" id="body">
     <header>
         <nav>
             <h1><img src="./img/pokemon-logo.png" alt="logo">Pokédex</h1><input type="text">
@@ -21,6 +21,15 @@
         <article id="pokemon-list">
 
         </article>
+        <button onclick="loadMorePokemon()" class="load-more">load more pokémon</button>
+        <dialog id="pokemon-overlay">
+
+        </dialog>
+
+        <dialog class="loadingspinner" id="loading-spinner">
+            ...loading
+        </dialog>
+
     </main>
 
     <footer>
