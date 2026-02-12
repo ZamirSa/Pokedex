@@ -59,8 +59,7 @@ async function getPokemonList(responseAsJson, pokemonListRef, i) {
     let weight = weightnumber.replaceAll(".", ",") + " kg";
 
     pokemonListRef.innerHTML += getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height, weight);
-    await getPokemonTypes(id, pokemonResponseAsJson);
-    console.log(pokemonResponseAsJson)
+    await getPokemonTypes(pokemonResponseAsJson.id, pokemonResponseAsJson);
 }
 
 
@@ -74,13 +73,36 @@ async function getPokemonTypes(id, pokemonResponseAsJson) {
 }
 
 
-async function openPokemonOverlay(pokemonName, gif, typeColor, id, height, weight, abilities, pokemonResponseAsJson) {
-    var element = document.getElementById("body");
-    element.classList.add("hidden");
-    let pokemonOverlay = document.getElementById("pokemon-overlay");
-    pokemonOverlay.showModal();
-    pokemonOverlay.innerHTML = getPokemonOverlayTemplate(pokemonName, gif, typeColor, id, height, weight, abilities);
-    document.getElementById("overlay-types" + id).innerHTML = document.getElementById("types" + id).innerHTML;
+async function openPokemonOverlay(i) {
+    if (i > 0) {
+        var element = document.getElementById("body");
+        element.classList.add("hidden");
+        let pokemonOverlay = document.getElementById("pokemon-overlay");
+
+        let pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}/`);
+        let pokemonResponseAsJson = await pokemonResponse.json();
+
+        let pokemonName = pokemonResponseAsJson.name;
+
+        let gif = pokemonResponseAsJson.sprites.other['official-artwork'].front_default;
+        let id = "#" + pokemonResponseAsJson.id;
+
+        let height = pokemonResponseAsJson.height + "0 cm";
+
+        let weightnumber = `${pokemonResponseAsJson.weight / 10}`;
+        let weight = weightnumber.replaceAll(".", ",") + " kg";
+
+        let typeColor = colours[pokemonResponseAsJson.types[0].type.name];
+
+        let abilities = pokemonResponseAsJson.abilities[0].ability.name
+
+        pokemonOverlay.showModal();
+        pokemonOverlay.innerHTML = getPokemonOverlayTemplate(pokemonName, gif, typeColor, id, height, weight, abilities, i);
+        document.getElementById("overlay-types" + i).innerHTML = document.getElementById("types" + i).innerHTML;
+    } else {
+        closePokemonOverlay()
+    }
+
 }
 
 
@@ -92,6 +114,9 @@ function closePokemonOverlay() {
 
 }
 
+function nextPokemonOverlay() {
+
+}
 
 function logDownWBubblingProtection(event) {
     event.stopPropagation();

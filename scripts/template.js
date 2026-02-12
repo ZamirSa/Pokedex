@@ -1,49 +1,47 @@
 function getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height, weight) {
     return `
-        <figure onclick="openPokemonOverlay('${pokemonName}', '${pokemonResponseAsJson.sprites.other.showdown.front_default}', '${colours[pokemonResponseAsJson.types[0].type.name]}', '${id}', '${height}', '${weight}', '${pokemonResponseAsJson.abilities[0].ability.name}', '${pokemonResponseAsJson}'); logDownWBubblingProtection(event);">
+        <figure onclick="openPokemonOverlay('${pokemonResponseAsJson.id}'); logDownWBubblingProtection(event);">
             <div style="background-color: ${colours[pokemonResponseAsJson.types[0].type.name]}";><img src="${img}" alt=""></div>
             <p>${id}</p>
             <h2>${pokemonName}</h2>
-            <span id="types${id}"></span>
+            <span id="types${pokemonResponseAsJson.id}"></span>
         </figure>
         `
 }
 
-function getPokemonOverlayTemplate(pokemonName, gif, typeColor, id, height, weight, abilities) {
+function getPokemonOverlayTemplate(pokemonName, gif, typeColor, id, height, weight, abilities, i) {
     return `
     <section onclick="logDownWBubblingProtection(event);">
-    <div class="pokemon-img-div" style="background-color: ${typeColor}">
+    <div class="overlay-upper-area" style="background-color: ${typeColor}">
         <div>
             <h3>${pokemonName}</h3>
             <p>${id}</p>
         </div>
         <div>
-            <span id="overlay-types${id}"></span>
+            <span id="overlay-types${i}"></span>
             <img src="${gif}" alt="">
         </div>
     </div>
-        <button onclick="closePokemonOverlay()">exit</button>
         <table>
                 <tr>
-                    <th>Height:</th>
+                    <th>Height</th>
                     <td>${height}</td>
                 </tr>
 
                 <tr>
-                    <th>Weight:</th>
+                    <th>Weight</th>
                     <td>${weight}</td>
                 </tr>
 
                 <tr>
-                    <th>Abilities:</th>
+                    <th>Abilities</th>
                     <td>${abilities}</td>
                 </tr>
-
-                <tr>
-                    <th>Gender:</th>
-                    <td></td>
-                </tr>
     </table>
+    <nav>
+<button onclick="closePokemonOverlay(); openPokemonOverlay(${i} - 1)"><img class ="flip" src="./img/arrow-right.png" alt=""></button>
+<button onclick="closePokemonOverlay(); openPokemonOverlay(${i} + 1)"><img src="./img/arrow-right.png" alt=""></button>
+</nav>
     </section>
     `
 }

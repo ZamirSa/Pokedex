@@ -1,10 +1,19 @@
 .pokemonoverlay {
     padding: 0;
-    border-radius: 15px;
+    border-radius: 30px;
+    border-color: #141414;
+    border-width: 5px;
+    font-size: 18px;
 }
 
 .pokemonoverlay section {
     height: 650px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 60px;
+    align-items: flex-start;
+    padding-bottom: 30px;
 }
 
 .pokemonoverlay[open] {
@@ -15,7 +24,10 @@
 
 }
 
-.pokemon-img-div {
+.overlay-upper-area {
+    background-image: url(/img/pokeball-transparent.png);
+    background-size: cover;
+    background-position: right;
     width: 350px;
     padding: 30px;
     height: 30%;
@@ -25,13 +37,34 @@
     color: white;
 }
 
-.pokemon-img-div img {
-    width: 120px;
+.overlay-upper-area img {
+    width: 130px;
 }
 
-.pokemon-img-div div {
+.overlay-upper-area div {
     display: flex;
     justify-content: space-between;
+}
+
+.pokemonoverlay tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-left: 30px;
+}
+
+.pokemonoverlay tr {
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+}
+
+.pokemonoverlay th {
+    color: #494949;
+}
+
+td::first-letter {
+    text-transform: capitalize;
 }
 
 h3::first-letter {
@@ -43,6 +76,48 @@ h3 {
     font-size: 24px;
 }
 
+.overlay-upper-area div span {
+    display: flex;
+    margin-top: 15px;
+    gap: 5px;
+}
+
+.overlay-upper-area div span div {
+    background-color: rgba(0, 0, 0, 0.185) !important;
+    padding: 15px;
+    height: 5px;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    border-style: solid;
+    border-width: 1px;
+}
+
 .pokemonoverlay p {
     margin: 0;
+}
+
+.flip {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+}
+
+.pokemonoverlay nav {
+    display: flex;
+    justify-content: space-between;
+    align-self: center;
+    width: 80%;
+}
+
+.pokemonoverlay nav img {
+    width: 80px;
+}
+
+.pokemonoverlay nav button {
+    background: none;
+    border: none;
+}
+
+.pokemonoverlay nav button:hover {
+    cursor: pointer;
 }
