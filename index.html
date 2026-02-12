@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./styles/pokemonoverlay.css">
     <script src="./script.js"></script>
+    <script src="./scripts/template.js"></script>
+    <script src="./scripts/db.js"></script>
     <link rel="shortcut icon" href="./img/pokemon-logo.png" type="image/x-icon">
     <title>Pokédex</title>
 </head>
 
-<body onload="init()" id="body">
+<body onload="init()" id="body" onclick="closePokemonOverlay()">
     <header>
         <nav>
             <h1><img src="./img/pokemon-logo.png" alt="logo">Pokédex</h1><input type="text">
@@ -22,7 +25,7 @@
 
         </article>
         <button onclick="loadMorePokemon()" class="load-more">load more pokémon</button>
-        <dialog class="pokemonoverlay" id="pokemon-overlay">
+        <dialog class="pokemonoverlay" id="pokemon-overlay" onload="logDownWBubblingProtection(event)">
 
         </dialog>
 
