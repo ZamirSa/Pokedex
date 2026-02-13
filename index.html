@@ -13,19 +13,20 @@
     <title>Pokédex</title>
 </head>
 
-<body onload="init()" id="body" onclick="closePokemonOverlay()">
+<body onload="init()" id="body">
     <header>
         <nav>
             <h1><img src="./img/pokemon-logo.png" alt="logo">Pokédex</h1><input type="text">
         </nav>
     </header>
 
-    <main>
+    <main id="main">
         <article id="pokemon-list">
 
         </article>
         <button onclick="loadMorePokemon()" class="load-more">load more pokémon</button>
-        <dialog class="pokemonoverlay" id="pokemon-overlay" onload="logDownWBubblingProtection(event)">
+        <dialog class="pokemonoverlay" id="pokemon-overlay" onload="logDownWBubblingProtection(event)"
+            onclick="closePokemonOverlay()">
 
         </dialog>
 

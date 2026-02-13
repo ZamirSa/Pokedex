@@ -1,4 +1,4 @@
-function getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height, weight) {
+async function getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height, weight) {
     return `
         <figure onclick="openPokemonOverlay('${pokemonResponseAsJson.id}'); logDownWBubblingProtection(event);">
             <div style="background-color: ${colours[pokemonResponseAsJson.types[0].type.name]}";><img src="${img}" alt=""></div>
