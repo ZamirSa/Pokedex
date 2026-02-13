@@ -12,6 +12,29 @@ async function onloadFunc() {
     await renderPokemonList(responseAsJson);
 }
 
+async function searchPokemon() {
+    let pokemonListRef = document.getElementById("pokemon-list");
+    pokemonListRef.innerHTML = "";
+
+    let searchBarRef = document.getElementById("search-bar");
+
+    let pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${searchBarRef.value}/`);
+    let pokemonResponseAsJson = await pokemonResponse.json();
+
+    let pokemonName = pokemonResponseAsJson.name;
+
+    let img = pokemonResponseAsJson.sprites.other['official-artwork'].front_default;
+    let id = "#" + pokemonResponseAsJson.id;
+
+    let height = pokemonResponseAsJson.height + "0 cm";
+
+    let weightnumber = `${pokemonResponseAsJson.weight / 10}`;
+    let weight = weightnumber.replaceAll(".", ",") + " kg";
+
+    pokemonListRef.innerHTML += await getPokemonTemplate(pokemonName, img, id, pokemonResponseAsJson, height, weight);
+    await getPokemonTypes(pokemonResponseAsJson.id, pokemonResponseAsJson);
+
+}
 
 function showLoadingSpinner() {
     let element = document.getElementById("body");
@@ -41,11 +64,12 @@ async function renderPokemonList(responseAsJson) {
 
         await getPokemonList(responseAsJson, pokemonListRef, i);
     }
+
 }
 
 
 async function getPokemonList(responseAsJson, pokemonListRef, i) {
-    let pokemonResponse = await fetch(responseAsJson.results[i].url);
+    let pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${responseAsJson.results[i].name}/`);
     let pokemonResponseAsJson = await pokemonResponse.json();
 
     let pokemonName = pokemonResponseAsJson.name;
@@ -58,7 +82,7 @@ async function getPokemonList(responseAsJson, pokemonListRef, i) {
     let weightnumber = `${pokemonResponseAsJson.weight / 10}`;
     let weight = weightnumber.replaceAll(".", ",") + " kg";
 
-    pokemonListRef.innerHTML += await getPokemonTemplate(i, pokemonName, img, id, pokemonResponseAsJson, height, weight);
+    pokemonListRef.innerHTML += await getPokemonTemplate(pokemonName, img, id, pokemonResponseAsJson, height, weight);
     await getPokemonTypes(pokemonResponseAsJson.id, pokemonResponseAsJson);
 }
 
