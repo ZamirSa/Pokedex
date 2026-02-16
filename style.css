@@ -41,6 +41,22 @@ header nav input {
     height: 20px
 }
 
+header nav div {
+    display: flex;
+    align-items: center;
+}
+
+.search-error {
+    background-color: rgb(227, 53, 13);
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 15px;
+    transition: all 0.5s;
+    display: none;
+}
+
 
 main {
     align-self: center;
@@ -68,6 +84,7 @@ figure {
     display: flex;
     margin: 0;
     padding: 20px;
+    width: 225px;
     border-radius: 5px;
     gap: 5px;
     transition: all 0.2s;
@@ -87,7 +104,7 @@ figure img {
 
 figure p {
     margin: 0;
-    padding-left: 30px;
+    padding-left: 5px;
     color: #919191;
     font-weight: bold;
 }
@@ -109,7 +126,7 @@ figure span div {
 h2 {
     font-size: 24px;
     margin: 0;
-    padding-left: 30px;
+    padding-left: 5px;
 }
 
 h2::first-letter {

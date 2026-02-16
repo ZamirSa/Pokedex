@@ -1,46 +1,58 @@
-async function getPokemonTemplate(pokemonName, img, id, pokemonResponseAsJson, height, weight) {
+async function getPokemonTemplate(pokemonName, pokemonResponseAsJson, i) {
     return `
-        <figure onclick="openPokemonOverlay('${pokemonResponseAsJson.id}', '${pokemonName}'); logDownWBubblingProtection(event);">
-            <div style="background-color: ${colours[pokemonResponseAsJson.types[0].type.name]}";><img src="${img}" alt=""></div>
-            <p>${id}</p>
-            <h2>${pokemonName}</h2>
-            <span id="types${pokemonResponseAsJson.id}"></span>
+        <figure onclick="openPokemonOverlay('${i}', '${pokemonName}'); logDownWBubblingProtection(event);">
+            <div style="background-color: ${currentTypeColor[index]}";><img src="${currentImgs[index]}" alt=""></div>
+            <p>${currentIds[index]}</p>
+            <h2>${currentNames[index]}</h2>
+            <span id="types${currentIds[index]}"></span>
         </figure>
         `
 }
 
-function getPokemonOverlayTemplate(pokemonName, gif, typeColor, id, height, weight, abilities, i) {
+function getPokemonOverlayTemplate(i) {
     return `
     <section onclick="logDownWBubblingProtection(event);">
-    <div class="overlay-upper-area" style="background-color: ${typeColor}">
+    <div class="overlay-upper-area" style="background-color: ${currentTypeColor[index]}">
         <div>
-            <h3>${pokemonName}</h3>
-            <p>${id}</p>
+            <h3>${currentNames[index]}</h3>
+            <p>${currentIds[index]}</p>
         </div>
         <div>
-            <span id="overlay-types${i}"></span>
-            <img src="${gif}" alt="">
+            <span id="overlay-types${currentIds[index]}"></span>
+            <img src="${currentImgs[index]}" alt="">
         </div>
     </div>
         <table>
                 <tr>
                     <th>Height</th>
-                    <td>${height}</td>
+                    <td>${currentHeights[index]}</td>
                 </tr>
 
                 <tr>
                     <th>Weight</th>
-                    <td>${weight}</td>
+                    <td>${currentWeights[index]}</td>
                 </tr>
 
                 <tr>
                     <th>Abilities</th>
-                    <td>${abilities}</td>
+                    <td>${currentAbilities[index]}</td>
+                </tr>
+
+                <tr>
+                <th>HP</th>
+                    <td>${currentHPs[index]}</td>
+                </tr>
+
+                <th>Attack</th>
+                    <td>${currentAttacks[index]}</td>
+                </tr>
+                <th>Defense</th>
+                    <td>${currentDefenses[index]}</td>
                 </tr>
     </table>
     <nav>
-<button onclick="closePokemonOverlay(); openPokemonOverlay(${i} - 1)"><img class ="flip" src="./img/arrow-right.png" alt=""></button>
-<button onclick="closePokemonOverlay(); openPokemonOverlay(${i} + 1)"><img src="./img/arrow-right.png" alt=""></button>
+<button onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt=""></button>
+<button onclick="closePokemonOverlay(); nextPokemonOverlay()"><img src="./img/arrow-right.png" alt=""></button>
 </nav>
     </section>
     `

@@ -56,11 +56,17 @@
 .pokemonoverlay tr {
     display: flex;
     justify-content: space-between;
-    gap: 60px;
+    gap: 80px;
 }
 
 .pokemonoverlay th {
     color: #494949;
+    width: 80px;
+    text-align: start;
+}
+
+.pokemonoverlay td {
+    width: 150px;
 }
 
 td::first-letter {

@@ -19,3 +19,13 @@ let colours = {
     fairy: '#D685AD',
 };
 let amount = 0;
+let currentNames = [];
+let currentImgs = [];
+let currentIds = [];
+let currentHeights = [];
+let currentWeights = [];
+let currentAbilities = [];
+let currentTypeColor = [];
+let currentHPs = [];
+let currentAttacks = [];
+let currentDefenses = [];
