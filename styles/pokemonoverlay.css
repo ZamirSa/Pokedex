@@ -25,7 +25,7 @@
 }
 
 .overlay-upper-area {
-    background-image: url(/img/pokeball-transparent.png);
+    background-image: url(../img/pokeball-transparent.png);
     background-size: cover;
     background-position: right;
     width: 350px;
@@ -126,4 +126,41 @@ h3 {
 
 .pokemonoverlay nav button:hover {
     cursor: pointer;
+}
+
+@media (max-width: 480px) {
+   .pokemonoverlay section {
+    gap: 30px;
+    align-items: center;
+    height: 630px;
+    padding-bottom: 15px;
+   }
+   
+    .overlay-upper-area {
+    width: 250px;
+    padding: 10px;
+    height: 30%;
+   } 
+
+   .overlay-upper-area div {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   }
+
+   .pokemonoverlay tbody {
+    margin-left: 0;
+}
+
+   .pokemonoverlay tr {
+    gap: 30px;
+   }
+
+   .pokemonoverlay td {
+    width: unset;
+}
+
+.pokemonoverlay nav {
+    width: unset;
+}
 }

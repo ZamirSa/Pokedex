@@ -18,6 +18,8 @@ let colours = {
     steel: '#B7B7CE',
     fairy: '#D685AD',
 };
+
+let index = 0;
 let amount = 0;
 let currentNames = [];
 let currentImgs = [];

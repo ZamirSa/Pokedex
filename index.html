@@ -16,11 +16,14 @@
 <body onload="init()" id="body">
     <header>
         <nav>
-            <h1><img src="./img/pokemon-logo.png" alt="logo">Pokédex</h1>
-            <div>
-                <p id="search-error" class="search-error">Please enter at least 3 letters.</p><input type="text"
-                    id="search-bar" placeholder="Enter pokémon..."><button onclick="searchPokemon()">search</button>
+            <h1 id="h1"><img src="./img/pokemon-logo.png" alt="logo">Pokédex</h1>
+            <div id="search" class="displaynone">
+                <p id="search-error" class="search-error">Please enter at least 3 letters.</p><span>
+                    <input type="text" id="search-bar" placeholder="Enter pokémon...">
+                    <button class="search-button" onclick="searchPokemon()"><img src="./img/janjf93-magnifying-glass-1976105_1280.png" alt="magnifying-glass"></button>
+                </span>
             </div>
+            <button class="menu" onclick="search()"><img src="./img/menu.png" alt="menu"></button>
         </nav>
     </header>
 
@@ -28,14 +31,16 @@
         <article id="pokemon-list">
 
         </article>
-        <button onclick="loadMorePokemon()" class="load-more">load more pokémon</button>
+        <button id="load-more-button" onclick="loadMorePokemon()" class="load-more">load more pokémon</button>
+        <button id="reload-button" onclick="reloadPokemon()" class="load-more" style="display: none;">reload
+            pokémon</button>
         <dialog class="pokemonoverlay" id="pokemon-overlay" onload="logDownWBubblingProtection(event)"
             onclick="closePokemonOverlay()">
 
         </dialog>
 
         <dialog class="loadingspinner" id="loading-spinner">
-            ...loading
+            ...<img src="./img/psddude-pokemon-8939.gif" alt="loadingspinner">
         </dialog>
 
 

@@ -1,6 +1,6 @@
-async function getPokemonTemplate(pokemonName, pokemonResponseAsJson, i) {
+async function getPokemonTemplate() {
     return `
-        <figure onclick="openPokemonOverlay('${i}', '${pokemonName}'); logDownWBubblingProtection(event);">
+        <figure tabindex="0" onclick="openPokemonOverlay('${currentNames[index]}'); logDownWBubblingProtection(event);">
             <div style="background-color: ${currentTypeColor[index]}";><img src="${currentImgs[index]}" alt=""></div>
             <p>${currentIds[index]}</p>
             <h2>${currentNames[index]}</h2>
@@ -9,7 +9,7 @@ async function getPokemonTemplate(pokemonName, pokemonResponseAsJson, i) {
         `
 }
 
-function getPokemonOverlayTemplate(i) {
+function getPokemonOverlayTemplate() {
     return `
     <section onclick="logDownWBubblingProtection(event);">
     <div class="overlay-upper-area" style="background-color: ${currentTypeColor[index]}">
@@ -51,9 +51,9 @@ function getPokemonOverlayTemplate(i) {
                 </tr>
     </table>
     <nav>
-<button onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt=""></button>
-<button onclick="closePokemonOverlay(); nextPokemonOverlay()"><img src="./img/arrow-right.png" alt=""></button>
-</nav>
+        <button onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt="arrowleft"></button>
+        <button onclick="nextPokemonOverlay()"><img src="./img/arrow-right.png" alt="arrowright"></button>
+    </nav>
     </section>
     `
 }
