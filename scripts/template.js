@@ -52,6 +52,7 @@ function getPokemonOverlayTemplate() {
     </table>
     <nav>
         <button onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt="arrowleft"></button>
+        <button class="exit" onclick="closePokemonOverlay()"><img src="./img/janjf93-x-1727490_1280.png" alt="leave"></button>
         <button onclick="nextPokemonOverlay()"><img src="./img/arrow-right.png" alt="arrowright"></button>
     </nav>
     </section>

@@ -113,7 +113,7 @@ async function onloadFuncSearchPokemon() {
         await fetchAllPokemon(searchBarRef);
 
         if (amount == 0) {
-            document.getElementById("pokemon-list").innerHTML = "not found";
+            document.getElementById("pokemon-list").innerHTML = `<div class="not-found"><img src="./img/succo-pokemon-go-1574002_640.png" alt="notfound">not found.</div>`;
         }
     } else if (searchBarRef.value.length < 3) {
         document.getElementById("search-error").style = "display: unset;"

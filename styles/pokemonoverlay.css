@@ -108,6 +108,10 @@ h3 {
     transform: scaleX(-1);
 }
 
+.exit img {
+    width: 50px!important;
+}
+
 .pokemonoverlay nav {
     display: flex;
     justify-content: space-between;
@@ -122,30 +126,38 @@ h3 {
 .pokemonoverlay nav button {
     background: none;
     border: none;
+    transition: all 0.2s;
 }
 
 .pokemonoverlay nav button:hover {
     cursor: pointer;
+    scale: 1.03;    
 }
 
 @media (max-width: 480px) {
    .pokemonoverlay section {
-    gap: 30px;
+    gap: 15px;
     align-items: center;
-    height: 630px;
+    height: 550px;
     padding-bottom: 15px;
+    font-size: 16px;
    }
    
     .overlay-upper-area {
     width: 250px;
     padding: 10px;
-    height: 30%;
+    height: 38%;
    } 
 
    .overlay-upper-area div {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5px;
+   }
+
+   .pokemonoverlay table {
+    width: 80%;
    }
 
    .pokemonoverlay tbody {
@@ -153,7 +165,7 @@ h3 {
 }
 
    .pokemonoverlay tr {
-    gap: 30px;
+    gap: 15px;
    }
 
    .pokemonoverlay td {
