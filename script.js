@@ -1,3 +1,39 @@
+let colours = {
+    normal: '#A8A77A',
+    fire: '#EE8130',
+    water: '#6390F0',
+    electric: '#F7D02C',
+    grass: '#7AC74C',
+    ice: '#96D9D6',
+    fighting: '#C22E28',
+    poison: '#A33EA1',
+    ground: '#E2BF65',
+    flying: '#A98FF3',
+    psychic: '#F95587',
+    bug: '#A6B91A',
+    rock: '#B6A136',
+    ghost: '#735797',
+    dragon: '#6F35FC',
+    dark: '#705746',
+    steel: '#B7B7CE',
+    fairy: '#D685AD',
+};
+
+
+let index = 0;
+let amount = 0;
+let currentNames = [];
+let currentImgs = [];
+let currentIds = [];
+let currentHeights = [];
+let currentWeights = [];
+let currentAbilities = [];
+let currentTypeColor = [];
+let currentHPs = [];
+let currentAttacks = [];
+let currentDefenses = [];
+
+
 async function init() {
     showLoadingSpinner();
     await onloadFunc();
@@ -64,7 +100,8 @@ function pushStats(pokemonResponseAsJson) {
 
 async function getPokemonTypes(id, pokemonResponseAsJson) {
     for (let iType = 0; iType < pokemonResponseAsJson.types.length; iType++) {
-        document.getElementById("types" + id).innerHTML += `<div style="background-color: ${currentTypeColor[index]};">${pokemonResponseAsJson.types[iType].type.name}</div>`;
+        document.getElementById("types" + id).innerHTML +=
+            `<div style="background-color: ${currentTypeColor[index]};">${pokemonResponseAsJson.types[iType].type.name}</div>`;
     }
 }
 
@@ -80,11 +117,11 @@ async function openPokemonOverlay(pokemonName) {
         hideBody();
         getCurrentIndex(pokemonName);
 
-
         let pokemonOverlay = document.getElementById("pokemon-overlay");
         pokemonOverlay.innerHTML = "";
         pokemonOverlay.showModal();
-        pokemonOverlay.innerHTML = getPokemonOverlayTemplate();
+        pokemonOverlay.innerHTML = await getPokemonOverlayTemplate();
+        arrowDisplays()
         document.getElementById("overlay-types" + currentIds[index]).innerHTML = document.getElementById("types" + currentIds[index]).innerHTML;
     } else {
         closePokemonOverlay()
@@ -97,6 +134,14 @@ function hideBody() {
     element.classList.add("hidden");
 }
 
+
+function arrowDisplays() {
+    if (index == 0) {
+        document.getElementById("arrowleft").style = "display: none;"
+    } if (index == currentNames.length - 1) {
+        document.getElementById("arrowright").style = "display: none;"
+    }
+}
 
 async function searchPokemon() {
     showLoadingSpinner();
@@ -175,8 +220,6 @@ function lastPokemonOverlay() {
     if (index > 0) {
         index--;
         openPokemonOverlay(currentNames[index]);
-    } else {
-        closePokemonOverlay();
     }
 }
 
@@ -206,7 +249,7 @@ function closeLoadingSpinner() {
 
 
 function closePokemonOverlay() {
-    var element = document.getElementById("body");
+    let element = document.getElementById("body");
     element.classList.remove("hidden");
     let pokemonOverlay = document.getElementById("pokemon-overlay");
     pokemonOverlay.close();

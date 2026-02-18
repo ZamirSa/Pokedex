@@ -162,6 +162,7 @@ h3 {
 
    .pokemonoverlay tbody {
     margin-left: 0;
+    height: 210px;
 }
 
    .pokemonoverlay tr {

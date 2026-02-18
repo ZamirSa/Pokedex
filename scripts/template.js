@@ -9,7 +9,7 @@ async function getPokemonTemplate() {
         `
 }
 
-function getPokemonOverlayTemplate() {
+async function getPokemonOverlayTemplate() {
     return `
     <section onclick="logDownWBubblingProtection(event);">
     <div class="overlay-upper-area" style="background-color: ${currentTypeColor[index]}">
@@ -51,9 +51,9 @@ function getPokemonOverlayTemplate() {
                 </tr>
     </table>
     <nav>
-        <button onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt="arrowleft"></button>
+        <button id="arrowleft" onclick="lastPokemonOverlay()"><img class ="flip" src="./img/arrow-right.png" alt="arrowleft"></button>
         <button class="exit" onclick="closePokemonOverlay()"><img src="./img/janjf93-x-1727490_1280.png" alt="leave"></button>
-        <button onclick="nextPokemonOverlay()"><img src="./img/arrow-right.png" alt="arrowright"></button>
+        <button id="arrowright" onclick="nextPokemonOverlay()"><img src="./img/arrow-right.png" alt="arrowright"></button>
     </nav>
     </section>
     `
