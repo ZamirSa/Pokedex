@@ -214,6 +214,7 @@ figure:hover {
 
 .not-found img {
     width: 200px;
+    align-self: center;
 }
 
 

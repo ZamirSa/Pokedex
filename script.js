@@ -42,13 +42,17 @@ async function init() {
 
 
 async function onloadFunc() {
-    for (let i = amount + 1; i < amount + 25; i++) {
-        let pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${[i]}/`);
-        let pokemonResponseAsJson = await pokemonResponse.json();
+    try {
+        for (let i = amount + 1; i < amount + 25; i++) {
+            let pokemonResponse = await fetch(`https://pokeapi.co/api/v2/pokemon/${[i]}/`);
+            let pokemonResponseAsJson = await pokemonResponse.json();
 
-        let pokemonName = pokemonResponseAsJson.name;
+            let pokemonName = pokemonResponseAsJson.name;
 
-        await renderPokemonList(pokemonResponseAsJson, pokemonName);
+            await renderPokemonList(pokemonResponseAsJson, pokemonName);
+        }
+    } catch (error) {
+        document.getElementById("pokemon-list").innerHTML = `<div class="not-found"><img src="./img/succo-pokemon-go-1574002_640.png" alt="notfound">Something went wrong. Please try later.</div>`;
     }
 }
 
@@ -145,7 +149,11 @@ function arrowDisplays() {
 
 async function searchPokemon() {
     showLoadingSpinner();
-    await onloadFuncSearchPokemon();
+    try {
+        await onloadFuncSearchPokemon();
+    } catch (error) {
+        document.getElementById("pokemon-list").innerHTML = `<div class="not-found"><img src="./img/succo-pokemon-go-1574002_640.png" alt="notfound">Something went wrong. Please try later.</div>`;
+    }
     closeLoadingSpinner();
 }
 
@@ -191,20 +199,27 @@ async function fetchAllPokemon(searchBarRef) {
 
 
 async function getSearchedPokemon(responseAsJson, searchBarRef) {
-    for (let iSearch = 0; iSearch < responseAsJson.results.length; iSearch++) {
-        let pokemonName = responseAsJson.results[iSearch].name
-        let searchedElement = searchBarRef.value.toLowerCase();
+    try {
+        for (let iSearch = 0; iSearch < responseAsJson.results.length; iSearch++) {
+            let pokemonName = responseAsJson.results[iSearch].name;
+            let searchedElement = searchBarRef.value.toLowerCase();
+            await fetchSearchedPokemon(responseAsJson, iSearch, pokemonName, searchedElement)
 
-        if (pokemonName.includes(searchedElement) == true && amount < 30) {
-            amount++
-            let pokemonResponse = await fetch(`${responseAsJson.results[iSearch].url}`);
-            let pokemonResponseAsJson = await pokemonResponse.json();
-
-            await renderPokemonList(pokemonResponseAsJson, pokemonName);
         }
+    } catch (error) {
+        document.getElementById("pokemon-list").innerHTML = `<div class="not-found"><img src="./img/succo-pokemon-go-1574002_640.png" alt="notfound">Something went wrong. Please try later.</div>`;
     }
 }
 
+async function fetchSearchedPokemon(responseAsJson, iSearch, pokemonName, searchedElement) {
+    if (pokemonName.includes(searchedElement) == true && amount < 30) {
+        amount++
+        let pokemonResponse = await fetch(`${responseAsJson.results[iSearch].url}`);
+        let pokemonResponseAsJson = await pokemonResponse.json();
+
+        await renderPokemonList(pokemonResponseAsJson, pokemonName);
+    }
+}
 
 function nextPokemonOverlay() {
     if (index < currentNames.length - 1) {
